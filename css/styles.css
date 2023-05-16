@@ -14,6 +14,8 @@
 
   --indent: 24px;
   --items: 4;
+
+  --anim-time: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 h1,
@@ -98,6 +100,8 @@ body {
   letter-spacing: 0.02em;
 
   color: var(--color-slate);
+
+  padding-top: 72px;
 }
 
 .container {
@@ -142,11 +146,20 @@ body {
 */
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
   border-bottom: 1px solid var(--color-cornflower);
   box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 1px 6px rgba(46, 47, 66, 0.08);
 
   padding: 24px 0;
+
+  background-color: var(--color-white);
+
+  z-index: 2;
 }
 
 .header-container {
@@ -188,6 +201,8 @@ body {
 }
 
 .nav-item {
+  position: relative;
+
   font-weight: 500;
   font-size: 16px;
   font-style: normal;
@@ -197,11 +212,32 @@ body {
   color: var(--color-navy-blue);
 
   padding: 24px 0;
+
+  transition: color var(--anim-time);
 }
 
 .nav-item:hover,
 .nav-item:focus {
   color: var(--color-ocean);
+}
+
+.nav-item.active {
+  color: var(--color-ocean);
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.nav-item.active::after {
+  background-color: var(--color-ocean);
 }
 
 .nav-link {
@@ -216,6 +252,8 @@ body {
 
 .contacts-item {
   color: var(--color-slate);
+
+  transition: color var(--anim-time);
 }
 
 .contacts-item:hover,
@@ -251,6 +289,8 @@ body {
   border-radius: 4px;
 
   border: none;
+
+  transition: background-color var(--anim-time);
 }
 
 .btn:hover,
@@ -373,6 +413,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: background-color var(--anim-time);
 }
 
 .team-social-img:hover,
@@ -417,6 +459,8 @@ body {
   color: var(--color-light-slate);
 
   padding: 16px 32px;
+
+  transition: color var(--anim-time), border var(--anim-time);
 }
 
 .customers-img:hover,
@@ -428,6 +472,8 @@ body {
 
 .customers-icon {
   fill: currentColor;
+
+  transition: fill var(--anim-time);
 }
 
 .customers-icon:hover,
@@ -500,6 +546,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 8px;
+
+  transition: background-color var(--anim-time);
 }
 
 .footer-social-img:hover,
@@ -546,16 +594,19 @@ body {
 
   cursor: pointer;
 
-  background: var(--color-cloud);
+  background-color: var(--color-cloud);
   border: 1px solid var(--color-cornflower);
   border-radius: 4px;
   color: var(--color-iris);
+
+  transition: background-color var(--anim-time), color var(--anim-time),
+    border var(--anim-time), box-shadow var(--anim-time);
 }
 
 .filter-btn:hover,
 .filter-btn:focus,
 .filter-btn:active {
-  background: var(--color-ocean);
+  background-color: var(--color-ocean);
   color: var(--color-white);
   border: 1px solid transparent;
 
@@ -577,6 +628,8 @@ body {
 
 .portfolio-card {
   display: block;
+
+  transition: box-shadow var(--anim-time), transform var(--anim-time);
 }
 
 .portfolio-card:hover,
@@ -585,9 +638,128 @@ body {
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
+.portfolio-card:hover .overlay-text,
+.portfolio-card:focus .overlay-text {
+  transform: translateY(0%);
+}
+
 .portfolio-card-text {
   padding: 32px 16px;
   text-align: left;
   border: 1px solid var(--color-cornflower);
   border-top: none;
+}
+
+.thumb {
+  position: relative;
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+/* Overlay */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(100%);
+
+  width: 100%;
+  height: 100%;
+  padding: 40px 32px;
+
+  background: var(--color-iris);
+
+  transition: transform var(--anim-time);
+}
+
+.portfolio-card-item:hover .overlay,
+.portfolio-card-item:focus .overlay {
+  transform: translateY(0);
+}
+
+.overlay-text {
+  color: var(--color-cloud);
+}
+
+/**
+  |============================
+  | Modal window
+  |============================
+*/
+
+.backdrop {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(46, 47, 66, 0.4);
+
+  transition: opacity var(--anim-time), visibility var(--anim-time);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: calc(50%);
+  left: calc(50%);
+
+  width: 408px;
+  height: 576px;
+  padding: 24px;
+
+  background-color: var(--color-dairy);
+
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-btn-close {
+  position: absolute;
+
+  top: 24px;
+  right: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  border-radius: 50%;
+  background-color: var(--color-cornflower);
+  border: none;
+
+  transition: background-color var(--anim-time);
+}
+
+.modal-btn-close:hover,
+.modal-btn-close:focus {
+  background-color: var(--color-ocean);
+  color: var(--color-white);
+}
+
+.modal-icon {
+  fill: var(--color-navy-blue);
+  transition: fill var(--anim-time);
+}
+
+.modal-btn-close:hover .modal-icon:hover,
+.modal-btn-close:focus .modal-icon:focus {
+  fill: currentColor;
 }
