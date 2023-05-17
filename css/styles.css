@@ -228,7 +228,7 @@ body {
 .nav-item::after {
   content: '';
   position: absolute;
-  bottom: -3px;
+  bottom: -1px;
   left: 0;
   display: block;
   width: 100%;
@@ -460,12 +460,12 @@ body {
 
   padding: 16px 32px;
 
-  transition: color var(--anim-time), border var(--anim-time);
+  transition: color var(--anim-time), border-color var(--anim-time);
 }
 
 .customers-img:hover,
 .customers-img:focus {
-  border: 1px solid var(--color-ocean);
+  border-color: var(--color-ocean);
 
   color: var(--color-ocean);
 }
@@ -599,8 +599,8 @@ body {
   border-radius: 4px;
   color: var(--color-iris);
 
-  transition: background-color var(--anim-time), color var(--anim-time),
-    border var(--anim-time), box-shadow var(--anim-time);
+  transition: color var(--anim-time), background-color var(--anim-time),
+    border-color var(--anim-time), box-shadow var(--anim-time);
 }
 
 .filter-btn:hover,
@@ -608,7 +608,7 @@ body {
 .filter-btn:active {
   background-color: var(--color-ocean);
   color: var(--color-white);
-  border: 1px solid transparent;
+  border-color: transparent;
 
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
@@ -629,7 +629,7 @@ body {
 .portfolio-card {
   display: block;
 
-  transition: box-shadow var(--anim-time), transform var(--anim-time);
+  transition: box-shadow var(--anim-time);
 }
 
 .portfolio-card:hover,
@@ -659,7 +659,7 @@ body {
 
 /* Overlay */
 
-.overlay {
+.overlay-text {
   position: absolute;
   top: 0;
   left: 0;
@@ -671,16 +671,19 @@ body {
 
   background: var(--color-iris);
 
+  font-size: 16px;
+  line-height: 1.5;
+
+  letter-spacing: 0.02em;
+
+  color: var(--color-cloud);
+
   transition: transform var(--anim-time);
 }
 
-.portfolio-card-item:hover .overlay,
-.portfolio-card-item:focus .overlay {
-  transform: translateY(0);
-}
-
-.overlay-text {
-  color: var(--color-cloud);
+.portfolio-card-item:hover .overlay-text,
+.portfolio-card-item:focus .overlay-text {
+  transform: translateY(0%);
 }
 
 /**
@@ -715,7 +718,7 @@ body {
   left: calc(50%);
 
   width: 408px;
-  height: 576px;
+  min-height: 576px;
   padding: 24px;
 
   background-color: var(--color-dairy);
@@ -725,6 +728,7 @@ body {
   border-radius: 4px;
 
   transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--anim-time);
 }
 
 .modal-btn-close {
@@ -743,9 +747,11 @@ body {
 
   border-radius: 50%;
   background-color: var(--color-cornflower);
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
-  transition: background-color var(--anim-time);
+  color: var(--color-navy-blue);
+
+  transition: background-color var(--anim-time), border var(--anim-time);
 }
 
 .modal-btn-close:hover,
@@ -755,7 +761,7 @@ body {
 }
 
 .modal-icon {
-  fill: var(--color-navy-blue);
+  fill: currentColor;
   transition: fill var(--anim-time);
 }
 
