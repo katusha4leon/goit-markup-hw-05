@@ -545,7 +545,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
 
   transition: background-color var(--anim-time);
 }
