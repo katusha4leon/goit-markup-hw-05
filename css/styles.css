@@ -460,7 +460,7 @@ body {
 
   padding: 16px 32px;
 
-  transition: color var(--anim-time), border-color var(--anim-time);
+  transition: border-color var(--anim-time), color var(--anim-time);
 }
 
 .customers-img:hover,
@@ -758,6 +758,7 @@ body {
 .modal-btn-close:focus {
   background-color: var(--color-ocean);
   color: var(--color-white);
+  border: none;
 }
 
 .modal-icon {
